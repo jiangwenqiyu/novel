@@ -3,8 +3,7 @@ server:
 
 spring:
   profiles:
-    active: prod
-    include: website,alipay,oss,fastdfs
+    active: dev
 
 
   rabbitmq:

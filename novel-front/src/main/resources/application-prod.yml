@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: [common-prod]
+    include: common-prod,website,alipay,oss,fastdfs
 
 #  #静态文件路径配置
 #  resources:

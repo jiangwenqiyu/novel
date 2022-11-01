@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: [common-dev]
+    include: common-dev,website,alipay,oss,fastdfs
 
 
 

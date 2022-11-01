@@ -32,7 +32,7 @@ import java.net.InetAddress;
 public class FrontNovelApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FrontNovelApplication.class);
+        SpringApplication.run(FrontNovelApplication.class, args);
     }
 
     @Bean
