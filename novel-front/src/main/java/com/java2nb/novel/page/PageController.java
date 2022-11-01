@@ -47,6 +47,9 @@ public class PageController extends BaseController {
     @Autowired
     AdverMapper mapper;
 
+    @Autowired
+    AdverService adverService;
+
     @Value("${content.save.path}")
     private String fileSavePath;
 
@@ -105,59 +108,13 @@ public class PageController extends BaseController {
         model.addAttribute("bookMap", bookCompletableFuture.get());
         model.addAttribute("newsList", newsCompletableFuture.get());
         // 判断该ip是否不加载广告
-        String ip = null;
-        String realIp = request.getHeader("X-Real-IP");
-        String xFordFor = request.getHeader("X-Forwarded-For");
-        if (realIp != null) {
-            ip = realIp;
-        } else if (xFordFor != null) {
-            ip = xFordFor;
-        }else {
-            ip = "127.0.0.1";
-        }
-        if (ip != null) {
-            List<String> i = mapper.selectIp(ip);
-            if (i.size() != 0) {
-                model.addAttribute("showAd", 2);
-            } else {
-                model.addAttribute("showAd", 1);
-            }
-        } else {
-            model.addAttribute("showAd", 1);
-        }
+
+        model.addAttribute("showAd", adverService.isShowAdver(request));
 
         return ThreadLocalUtil.getTemplateDir() + "index";
     }
 
 
-    /**
-     * 点击一次广告后，进行记录
-     */
-    @GetMapping("record")
-    @ResponseBody
-    public JSONObject adverRecord(HttpServletRequest request) {
-        System.out.println("开始记录");
-        String ip = null;
-        String realIp = request.getHeader("X-Real-IP");
-        String xFordFor = request.getHeader("X-Forwarded-For");
-        if (realIp != null) {
-            ip = realIp;
-        } else if (xFordFor != null) {
-            ip = xFordFor;
-        } else {
-            ip = "127.0.0.1";
-        }
-
-        System.out.println("ip:" + ip);
-
-        if (ip != null) {
-            mapper.insert(ip);
-        }
-
-        return new JSONObject();
-
-
-    }
 
 
     /**
@@ -173,29 +130,8 @@ public class PageController extends BaseController {
      */
     @RequestMapping("book/book_ranking.html")
     public String bookRank(HttpServletRequest request, Model model) {
-        // 判断该ip是否不加载广告
-        String ip = null;
-        String realIp = request.getHeader("X-Real-IP");
-        String xFordFor = request.getHeader("X-Forwarded-For");
-        if (realIp != null) {
-            ip = realIp;
-        } else if (xFordFor != null) {
-            ip = xFordFor;
-        }else {
-            ip = "127.0.0.1";
-        }
 
-
-        if (ip != null) {
-            List<String> i = mapper.selectIp(ip);
-            if (i.size() != 0) {
-                model.addAttribute("showAd", 2);
-            } else {
-                model.addAttribute("showAd", 1);
-            }
-        } else {
-            model.addAttribute("showAd", 1);
-        }
+        model.addAttribute("showAd", adverService.isShowAdver(request));
 
         return ThreadLocalUtil.getTemplateDir() + "book/book_ranking";
     }
@@ -244,27 +180,7 @@ public class PageController extends BaseController {
         model.addAttribute("bookCommentPageBean", bookCommentPageBeanCompletableFuture.get());
 
         // 判断该ip是否不加载广告
-        String ip = null;
-        String realIp = request.getHeader("X-Real-IP");
-        String xFordFor = request.getHeader("X-Forwarded-For");
-        if (realIp != null) {
-            ip = realIp;
-        } else if (xFordFor != null) {
-            ip = xFordFor;
-        }else {
-            ip = "127.0.0.1";
-        }
-
-        if (ip != null) {
-            List<String> i = mapper.selectIp(ip);
-            if (i.size() != 0) {
-                model.addAttribute("showAd", 2);
-            } else {
-                model.addAttribute("showAd", 1);
-            }
-        } else {
-            model.addAttribute("showAd", 1);
-        }
+        model.addAttribute("showAd", adverService.isShowAdver(request));
 
         return ThreadLocalUtil.getTemplateDir() + "book/book_detail";
     }
@@ -282,27 +198,8 @@ public class PageController extends BaseController {
         model.addAttribute("bookIndexCount", bookIndexList.size());
 
         // 判断该ip是否不加载广告
-        String ip = null;
-        String realIp = request.getHeader("X-Real-IP");
-        String xFordFor = request.getHeader("X-Forwarded-For");
-        if (realIp != null) {
-            ip = realIp;
-        } else if (xFordFor != null) {
-            ip = xFordFor;
-        }else {
-            ip = "127.0.0.1";
-        }
+        model.addAttribute("showAd", adverService.isShowAdver(request));
 
-        if (ip != null) {
-            List<String> i = mapper.selectIp(ip);
-            if (i.size() != 0) {
-                model.addAttribute("showAd", 2);
-            } else {
-                model.addAttribute("showAd", 1);
-            }
-        } else {
-            model.addAttribute("showAd", 1);
-        }
         return ThreadLocalUtil.getTemplateDir() + "book/book_index";
     }
 
@@ -386,26 +283,7 @@ public class PageController extends BaseController {
 
 
         // 判断该ip是否不加载广告
-        String ip = null;
-        String realIp = request.getHeader("X-Real-IP");
-        String xFordFor = request.getHeader("X-Forwarded-For");
-        if (realIp != null) {
-            ip = realIp;
-        } else if (xFordFor != null) {
-            ip = xFordFor;
-        }else {
-            ip = "127.0.0.1";
-        }
-        if (ip != null) {
-            List<String> i = mapper.selectIp(ip);
-            if (i.size() != 0) {
-                model.addAttribute("showAd", 2);
-            } else {
-                model.addAttribute("showAd", 1);
-            }
-        } else {
-            model.addAttribute("showAd", 1);
-        }
+        model.addAttribute("showAd", adverService.isShowAdver(request));
 
         return ThreadLocalUtil.getTemplateDir() + "book/book_content";
     }
