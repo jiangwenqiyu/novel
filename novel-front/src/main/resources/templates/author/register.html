@@ -43,7 +43,7 @@
                 </tr>
                 <tr><td align="right">邀请码：</td><td><input name="inviteCode" th:value="${author.inviteCode}" type="text" maxlength="12" id="TxtGetCode" class="easyui-validatebox inpMain" data-options="required:true" /></td>
                     <td>
-                        <span class="notes"> *</span> 枫林阁分配给作者的邀请码
+                        <span class="notes"> *</span> 枫林阁分配给您的邀请码
                     </td>
                 </tr>
                 <tr>
@@ -66,7 +66,7 @@
                         <input name="telPhone" th:value="${author.telPhone}" type="text" id="TxtMobile" class="easyui-validatebox inpMain" data-options="required:true" validType="chinaMobile" />
                     </td>
                     <td>
-                        <span class="notes"> *</span> 枫林阁的编辑会通过这个号码与您联系
+                        <span class="notes"> *</span> 枫林阁会通过这个号码与您联系
                     </td>
                 </tr>
                 <tr>
@@ -77,7 +77,7 @@
                         <input name="chatAccount" th:value="${author.chatAccount}" type="text" id="TxtQQ" class="easyui-validatebox inpMain" data-options="required:true" />
                     </td>
                     <td>
-                        <span class="notes"> *</span> 枫林阁的编辑会通过这个号码与您联系
+                        <span class="notes"> *</span> 枫林阁会通过这个号码与您联系
                     </td>
                 </tr>
                 <tr>
@@ -99,9 +99,9 @@
                         <div>
                             <ul class="ipage">
                                 <input type="hidden" name="workDirection" id="HidSexclass" /><!-- th:attr="class=${author.workDirection} == '0'? 'ahover':''"-->
-                                <a href="javascript:void(0);" val="0">男性主角选男频</a>
+                                <a href="javascript:void(0);" val="0">男性主角</a>
                                 <a href="javascript:void(0);" val="1">
-                                女性主角选女频</a>
+                                女性主角</a>
                                 <div class="clear">
                                 </div>
                             </ul>

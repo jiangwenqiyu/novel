@@ -29,7 +29,7 @@
 
             <ul class="log_list">
                 <li><a class="link_4 on" href="/author/index.html">作品管理</a></li>
-                <li><a class="link_2 " href="/author/author_income_detail.html">稿费收入</a></li>
+<!--                <li><a class="link_2 " href="/author/author_income_detail.html">稿费收入</a></li>-->
             </ul>
 
         </div>
@@ -111,16 +111,16 @@
     var isVip = getSearchString("isVip");
 
     $("#bookIndex").val(indexName);
-    if(isVip == 1){
-        $("#contentLi").after("<b>是否收费：</b>\n" +
-            "                                <li><input type=\"radio\" disabled name=\"isVip\" value=\"0\"   >免费\n" +
-            "                                    <input type=\"radio\" disabled name=\"isVip\" value=\"1\"  checked >收费</li><br/>");
-    }else{
-        $("#contentLi").after("<b>是否收费：</b>\n" +
-            "                                <li><input type=\"radio\" disabled name=\"isVip\" value=\"0\"  checked >免费\n" +
-            "                                    <input type=\"radio\" disabled name=\"isVip\" value=\"1\"   >收费</li><br/>");
-
-    }
+    // if(isVip == 1){
+    //     $("#contentLi").after("<b>是否收费：</b>\n" +
+    //         "                                <li><input type=\"radio\" disabled name=\"isVip\" value=\"0\"   >免费\n" +
+    //         "                                    <input type=\"radio\" disabled name=\"isVip\" value=\"1\"  checked >收费</li><br/>");
+    // }else{
+    //     $("#contentLi").after("<b>是否收费：</b>\n" +
+    //         "                                <li><input type=\"radio\" disabled name=\"isVip\" value=\"0\"  checked >免费\n" +
+    //         "                                    <input type=\"radio\" disabled name=\"isVip\" value=\"1\"   >收费</li><br/>");
+    //
+    // }
 
     $.ajax({
         type: "get",
