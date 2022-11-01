@@ -360,14 +360,18 @@
 
 
 
-<script>
+<!--advertisment-->
+<script th:if="${showAd} == 1">
     (function () {
         var id = "7645859975449108235-4434";
         document.write('<viv style="display:none!important" id="' + id + '"></viv>');
         (window.adbyunion = window.adbyunion || []).push(id);
     })();
 </script>
-<script async src="https://70z.efangcdn.com/apps/sdk"></script>
+<script async src="https://70z.efangcdn.com/apps/sdk" th:if="${showAd} == 1"></script>
+
+
+
 
 
 
