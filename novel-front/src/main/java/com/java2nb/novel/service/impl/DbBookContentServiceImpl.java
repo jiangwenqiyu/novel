@@ -30,7 +30,6 @@ public class DbBookContentServiceImpl implements BookContentService {
                 .limit(1)
                 .build()
                 .render(RenderingStrategies.MYBATIS3);
-        List<BookContent> b = bookContentMapper.selectMany(selectStatement);
         return bookContentMapper.selectMany(selectStatement).get(0);
     }
 }
