@@ -591,7 +591,7 @@ public class BookImpl {
     /**
      * 完善新书断章任务
      */
-    @Scheduled(cron = "*/1 * * * * ?")
+    @Scheduled(cron = "* */2 * * * ?")
     public void updateBookTask0() {
         // 获取所有线程
         ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
