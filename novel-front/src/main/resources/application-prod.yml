@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    include: [common-prod]
+
+#  #静态文件路径配置
+#  resources:
+#    static-locations: file:${user.dir}/templates/${templates.name}/static/
+#  #thymeleaf模版路径配置
+#  thymeleaf:
+#    prefix: file:${user.dir}/templates/${templates.name}/html/
+#    suffix: .html
+#
+###模版配置
+#templates:
+#  name: orange
+
+
+
+
+
+#线程池配置
+thread:
+  pool:
+    #核心线程池数量
+    core-pool-size: 10
+    #最大线程池数量
+    maximum-pool-size: 20
+    #线程超时时间（秒）
+    keep-alive-time: 10
+    #队列大小
+    queue-size: 1000
+
+

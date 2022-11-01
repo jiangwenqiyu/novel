@@ -1,0 +1,11 @@
+server:
+  port: 7890
+
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  profiles:
+    active: dev

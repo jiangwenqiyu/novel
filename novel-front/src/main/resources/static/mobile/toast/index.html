@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>弹窗插件</title>
+		<style type="text/css">
+			* {
+			    margin: 0px;
+			    padding: 0px;
+			    box-sizing: border-box;
+			    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			}
+			div.main{width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;}
+			div.main button{width: 70%;height: 35px;line-height: 35px;margin: 10px 0;}
+		</style>
+	</head>
+	<body>
+		<div class="main">
+			<button type="button" onclick="alert()" >alert弹窗</button>
+			<button type="button" onclick="confirm()" >confirm弹窗</button>
+			<button type="button" onclick="toast()" >toast弹窗</button>
+			<button type="button" onclick="loading()" >loading弹窗</button>
+			<button type="button" onclick="modal()" >自定义弹窗</button>
+		</div>
+		<div style="height: 1000px;"></div>
+		<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script src="alert.js"></script>
+		<script>
+		$(function(){
+
+		})
+		 function alert(){
+			 
+			 $.alert('alert弹窗文字说明',function(){
+				 $.toast('close');
+			 });
+			 //$.alert({title:'温馨提示',content:'alert弹窗文字说明',confirmText:'知道了'});
+		 }
+		 function confirm(){
+			 $.confirm('confirm弹窗文字说明',function(){
+				 $.toast('confirm');
+			 },function(){
+				 $.toast('cancel');
+			 });
+			 //$.confirm({title:'升级提示',content:'confirm弹窗文字说明',confirmText:'立即升级',cancelText:'暂不升级'});
+			 
+		 }
+		 function toast(){
+			// $.toast('toast',function(){
+			//	 console.log('close');
+			// });
+			$.toast({content:'toast弹窗',time:3000},function(){
+				console.log('close');
+			})
+		 }
+		 function loading(){
+			$.loading('加载中');
+			setTimeout(()=>{
+				$.hideLoading();
+			},3000)
+		 }
+		function modal(){
+			var html = '<input type="password" name="pwd" placeholder="请输入密码" style="text-align:center" />'
+			$.confirm({title:'支付密码',content:html},function(){
+				 var password = $('input[name="pwd"]').val();
+				 if(!password) {
+					 $.toast('请输入密码');return false;
+				 }
+				 $.toast(password);
+			});
+		}
+		</script>
+	</body>
+</html>

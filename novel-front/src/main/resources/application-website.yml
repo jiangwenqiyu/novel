@@ -1,0 +1,12 @@
+#网站配置
+website:
+  #网站名
+  name: 枫林阁
+  #域名
+  domain: www.fenglinge.net
+  #SEO关键词
+  keyword: ${website.name}小说,提供各种免费小说在线阅读
+  #SEO描述
+  description: ${website.name}是一个在线小说阅读平台,免费小说网站
+  #联系QQ
+  qq:
