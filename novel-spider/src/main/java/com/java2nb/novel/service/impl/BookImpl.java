@@ -496,9 +496,7 @@ public class BookImpl {
                 }
 
                 for (int j = 0; j < chapterList.size(); j++) {
-                    if (j < 875) {
-                        continue;
-                    }
+
                     // 即将更新的章节和索引是否存在
                     BookIndex bookIndexName = crawlSourceMapper.selectChapterByBookIndexName(bookId, j, chapterList.get(j));
                     if (bookIndexName == null) {
@@ -593,7 +591,7 @@ public class BookImpl {
     /**
      * 完善新书断章任务
      */
-    @Scheduled(cron = "* */5 * * * ?")
+    @Scheduled(cron = "* */1 * * * ?")
     public void updateBookTask0() {
         // 获取所有线程
         ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
@@ -651,7 +649,7 @@ public class BookImpl {
     /**
      * 爬取指定书籍任务
      */
-    @Scheduled(cron = "* */1 * * * ?")
+//    @Scheduled(cron = "* */1 * * * ?")
     public void designatedBookTask() {
         // 获取所有线程
         ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
@@ -674,11 +672,6 @@ public class BookImpl {
         }
 
     }
-
-
-
-
-
 
 
 
