@@ -23,7 +23,7 @@ spring:
     #连接超时时间（毫秒）
     timeout: 30000
   datasource:
-    url: jdbc:mysql://69.49.246.110:3306/fenglinge?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://69.49.246.110:3306/fenglinge?useUnicode=true&useSSL=false&serverTimezone=UTC
     username: root
     password: Fenglinge123!
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -40,7 +40,7 @@ sharding:
       ds0:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://69.49.246.110:3306/fenglinge?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+        jdbc-url: jdbc:mysql://69.49.246.110:3306/fenglinge?useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai
         username: root
         password: Fenglinge123!
     #      ds1:
