@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -105,6 +107,11 @@ public class StatController {
             cmd = "cd /data && ./spider.sh";
         }
         Process process = Runtime.getRuntime().exec(cmd);
+        String ret = null;
+        BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        while ((ret = br.readLine())  != null) {
+
+        }
 
 
 
