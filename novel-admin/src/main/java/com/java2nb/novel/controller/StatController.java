@@ -110,7 +110,7 @@ public class StatController {
         String ret = null;
         BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
         while ((ret = br.readLine())  != null) {
-
+            System.out.println(ret);
         }
 
 
