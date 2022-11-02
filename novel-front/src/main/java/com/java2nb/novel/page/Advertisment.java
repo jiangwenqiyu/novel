@@ -1,6 +1,10 @@
 package com.java2nb.novel.page;
 
 import com.alibaba.fastjson.JSONObject;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.java2nb.novel.mapper.AdverMapper;
 import com.java2nb.novel.service.AdverService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +54,57 @@ public class Advertisment {
         Map<String, Integer> map = new HashMap<>();
         map.put("isShowAdver", adverService.isShowAdver(request));
         return map;
+    }
+
+
+
+
+
+
+    /**
+     * 获取页面文档字串(等待异步JS执行)
+     *
+     * @param url 页面URL
+     * @return
+     * @throws Exception
+     */
+    public static String getHtmlPageResponse(String url) throws Exception {
+        String result = "";
+        final WebClient webClient = new WebClient(BrowserVersion.CHROME);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);//当JS执行出错的时候是否抛出异常
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);//当HTTP的状态非200时是否抛出异常
+        webClient.getOptions().setActiveXNative(false);
+        webClient.getOptions().setCssEnabled(false);//是否启用CSS
+        webClient.getOptions().setJavaScriptEnabled(true); //很重要，启用JS
+        webClient.setAjaxController(new NicelyResynchronizingAjaxController());//很重要，设置支持AJAX
+        webClient.getOptions().setTimeout(30000);//设置“浏览器”的请求超时时间
+        webClient.setJavaScriptTimeout(30000);//设置JS执行的超时时间
+        webClient.addRequestHeader("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Mobile Safari/537.36");
+        HtmlPage page;
+        try {
+            page = webClient.getPage(url);
+        } catch (Exception e) {
+            webClient.close();
+            throw e;
+        }
+        webClient.waitForBackgroundJavaScript(3000);//该方法阻塞线程
+        result = page.asXml();
+        webClient.close();
+        return result;
+    }
+
+
+    @GetMapping("adver")
+    @ResponseBody
+    public Map<String, String> getAdver() throws Exception {
+        String code = getHtmlPageResponse("http://127.0.0.1:8899/mobile/adver/adver.html");
+        Map<String, String> result = new HashMap<>();
+
+        int s = code.indexOf("<ins ");
+        int e = code.indexOf("</ins>")+"</ins>".length();
+        String content = code.substring(s, e);
+        result.put("code", content);
+        return result;
     }
 
 
