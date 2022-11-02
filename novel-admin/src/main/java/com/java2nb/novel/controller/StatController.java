@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
@@ -88,6 +89,28 @@ public class StatController {
                 .put("pvSta",pvSta)
                 ;
     }
+
+
+    @ResponseBody
+    @GetMapping("/deploy")
+    @SneakyThrows
+    public R deploy(@RequestParam String type) {
+        // type 1 部署前端   2 部署后端   3  部署爬虫
+        String cmd = "";
+        if (type.equals("1")) {
+            cmd = "cd /data && ./front.sh";
+        } else if (type.equals("2")) {
+            cmd = "cd /data && ./admin.sh";
+        } else {
+            cmd = "cd /data && ./spider.sh";
+        }
+        Process process = Runtime.getRuntime().exec(cmd);
+
+
+
+        return new R();
+    }
+
 
 
 
