@@ -1,10 +1,15 @@
 package com.java2nb.novel.service;
 
+import com.java2nb.novel.entity.Advertisment;
+
 import javax.servlet.http.HttpServletRequest;
 
 public interface AdverService {
 
-    public int isShowAdver(HttpServletRequest request);
+    int isShowAdver(HttpServletRequest request, String id);
 
-    public void clickRecode(HttpServletRequest request);
+    void clickRecode(HttpServletRequest request, String id);
+
+
+    Advertisment selectAdver(HttpServletRequest request);
 }

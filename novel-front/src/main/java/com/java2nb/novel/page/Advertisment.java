@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +37,8 @@ public class Advertisment {
      */
     @GetMapping("record")
     @ResponseBody
-    public JSONObject adverRecord(HttpServletRequest request) {
-        adverService.clickRecode(request);
+    public JSONObject adverRecord(HttpServletRequest request, @RequestParam String id) {
+        adverService.clickRecode(request, id);
 
         return new JSONObject();
     }
@@ -50,9 +51,9 @@ public class Advertisment {
      */
     @GetMapping("isShowAdver")
     @ResponseBody
-    public Map<String, Integer> isShowAdver(HttpServletRequest request) {
+    public Map<String, Integer> isShowAdver(HttpServletRequest request, @RequestParam String id) {
         Map<String, Integer> map = new HashMap<>();
-        map.put("isShowAdver", adverService.isShowAdver(request));
+        map.put("isShowAdver", adverService.isShowAdver(request, id));
         return map;
     }
 

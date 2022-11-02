@@ -9,6 +9,7 @@ import com.java2nb.novel.controller.BaseController;
 import com.java2nb.novel.core.bean.UserDetails;
 import com.java2nb.novel.core.utils.ThreadLocalUtil;
 import com.java2nb.novel.entity.*;
+import com.java2nb.novel.entity.Advertisment;
 import com.java2nb.novel.mapper.AdverMapper;
 import com.java2nb.novel.service.*;
 import com.java2nb.novel.vo.BookCommentVO;
@@ -107,9 +108,10 @@ public class PageController extends BaseController {
         CompletableFuture<List<News>> newsCompletableFuture = CompletableFuture.supplyAsync(newsService::listIndexNews, threadPoolExecutor);
         model.addAttribute("bookMap", bookCompletableFuture.get());
         model.addAttribute("newsList", newsCompletableFuture.get());
-        // 判断该ip是否不加载广告
 
-        model.addAttribute("showAd", adverService.isShowAdver(request));
+        // 获取广告信息
+        Advertisment advertisment = adverService.selectAdver(request);
+        model.addAttribute("advertisment", advertisment);
 
         return ThreadLocalUtil.getTemplateDir() + "index";
     }
@@ -131,7 +133,10 @@ public class PageController extends BaseController {
     @RequestMapping("book/book_ranking.html")
     public String bookRank(HttpServletRequest request, Model model) {
 
-        model.addAttribute("showAd", adverService.isShowAdver(request));
+
+        // 获取广告信息
+        Advertisment advertisment = adverService.selectAdver(request);
+        model.addAttribute("advertisment", advertisment);
 
         return ThreadLocalUtil.getTemplateDir() + "book/book_ranking";
     }
@@ -179,8 +184,10 @@ public class PageController extends BaseController {
         model.addAttribute("recBooks", recBookCompletableFuture.get());
         model.addAttribute("bookCommentPageBean", bookCommentPageBeanCompletableFuture.get());
 
-        // 判断该ip是否不加载广告
-        model.addAttribute("showAd", adverService.isShowAdver(request));
+
+        // 获取广告信息
+        Advertisment advertisment = adverService.selectAdver(request);
+        model.addAttribute("advertisment", advertisment);
 
         return ThreadLocalUtil.getTemplateDir() + "book/book_detail";
     }
@@ -197,8 +204,10 @@ public class PageController extends BaseController {
         model.addAttribute("bookIndexList", bookIndexList);
         model.addAttribute("bookIndexCount", bookIndexList.size());
 
-        // 判断该ip是否不加载广告
-        model.addAttribute("showAd", adverService.isShowAdver(request));
+
+        // 获取广告信息
+        Advertisment advertisment = adverService.selectAdver(request);
+        model.addAttribute("advertisment", advertisment);
 
         return ThreadLocalUtil.getTemplateDir() + "book/book_index";
     }
@@ -282,8 +291,10 @@ public class PageController extends BaseController {
         model.addAttribute("needBuy", needBuyCompletableFuture.get());
 
 
-        // 判断该ip是否不加载广告
-        model.addAttribute("showAd", adverService.isShowAdver(request));
+
+        // 获取广告信息
+        Advertisment advertisment = adverService.selectAdver(request);
+        model.addAttribute("advertisment", advertisment);
 
         return ThreadLocalUtil.getTemplateDir() + "book/book_content";
     }
@@ -334,8 +345,6 @@ public class PageController extends BaseController {
         }
         return "author/register";
     }
-
-
 
 
 

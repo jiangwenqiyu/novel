@@ -321,16 +321,9 @@
 
 
 <!--advertisment-->
-<script th:if="${showAd} == 1">
-    (function () {
-        var id = "7645859975449108235-4434";
-        document.write('<viv style="display:none!important" id="' + id + '"></viv>');
-        (window.adbyunion = window.adbyunion || []).push(id);
-    })();
-</script>
-<script async src="https://70z.efangcdn.com/apps/sdk" th:if="${showAd} == 1"></script>
+<th:block  th:utext="${advertisment.adverCode}"></th:block>
 
-<script th:if="${showAd} == 1">
+<script th:inline="javascript" >
     jQuery.fn.wait = function (func, times, interval) {
         var _times = times || 10000, //100次
             _interval = interval || 2000, //20毫秒每次
@@ -356,27 +349,24 @@
     }
 
     //   等待指定标签加载成功
-    $(".SaVRbB").wait(function(){
-        // 判断该ip今日是否已经点击过了
+    $([[${advertisment.autoClick}]]).wait(function(){
+        // 判断该ip是否加载广告
         $.ajax({
-            url: '/isShowAdver',
+            url: '/isShowAdver?id=[[${advertisment.id}]]',
             method: 'get',
             success: function (resp) {
                 if (resp.isShowAdver == 1) {
-                    // 如果没点过，先记录，然后进行点击，
+                    // 需要加载
                     $.ajax({
-                        url: '/record',
+                        url: '/record?id=[[${advertisment.id}]]',
                         method: 'get',
                         success: function () {
-                            $(".SaVRbB").click();
+                            $([[${advertisment.autoClick}]]).click();
                         }
                     });
-
-
-
                 } else {
-                    // 如果点过了，把页面的广告删掉
-                    $("#lUYfV7cQQ").html("");
+                    // 不需要加载
+                    $([[${advertisment.autoClick}]]).html("");
                 }
             }
         })
